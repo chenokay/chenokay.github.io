@@ -78,13 +78,7 @@ Peter Zaitsev — More discussion about why swapping is bad, but no solution.
 Despite all the discussion, not much has changed. There are some hacky solutions to get MySQL to stop swapping, but nothing definite. I’ve known these solutions and hacks now for a while, but the core question was never really settled: “Why does this happen?” and it’s never sat well with me. I was recently tasked with trying to sort this mess out once and for all, so I’ve now done quite a bit of research and testing related to the problem. I’ve learned a lot, and decided a big blog entry might be the best way to share it. Enjoy.
 There was a lot of discussion and some work went into adding the relatively new swappiness tunable a few years ago, and I think that may have solved some of the original problems, but at around the same time the basic architecture of the machine changed to NUMA, which I think introduced some new problems, with the very same symptoms, masking the original fix.
 Contrasting the SMP/UMA and NUMA architecturesThe SMP/UMA architecture
-</p>
-
-<p>
-<img src="file:///home/chenzhen/wiki/blog_source//images/uma-architecture.png" />
-</p>
-
-<p>
+<img src="/images/uma-architecture.png" alt="mem architecture">
 The SMP, or UMA architecture, simplified
 When the PC world first got multiple processors, they were all arranged with equal access to all of the memory in the system. This is called Symmetric Multi-processing (SMP), or sometimes Uniform Memory Architecture (UMA, especially in contrast to NUMA). In the past few years this architecture has been largely phased out between physical socketed processors, but is still alive and well today within a single processor with multiple cores: all cores have equal access to the memory bank.
 The NUMA architecture
