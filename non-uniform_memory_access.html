@@ -32,7 +32,7 @@
 <section id="main-content">
 
 <p>
-non-uniform memory access (NUMA) 是在SMP体系架构之后出现的，每一种技术的出现都是为了解决当时环境下的问题，同时也会带来一些新的问题和局限。 SMP和NUMA其实就如普通计算系统中集中和分布的思想，集中便于管理和控制，但是不够灵活和衍生，对应地，分布系统不太可控。
+non-uniform memory access (NUMA) 是在SMP体系架构之后出现的，每一种技术的出现都是为了解决当时环境下的问题，同时也会带来一些新的问题和局限。 SMP和NUMA其实就如普通计算系统中集中和分布的思想，集中便于管理和控制，但是不够灵活和不便于衍生，对应地，分布系统不太可控。
 以下是这两种系统的结构图：
 </p>
 
@@ -45,7 +45,7 @@ SMP结构示意图
 </p>
 
 <p>
-<img src="/images/numa-architecture.png" />
+<img src="/images/uma-architecture.png" />
 </p>
 
 <p>
@@ -54,7 +54,7 @@ NUMA结构示意图
 
 <p>
 可以看到SMP类的结构图中，所有CPU和memory的交付都需要通过BUS进行，BUS将成为性能瓶颈，在体系结构的扩展上也只能沿BUS进行。
-NUMA体系结构则是把CPU和memory进行绑定，这样unit间BUS进行连接。我自己开发环境中就是NUMA的结构，通过cat cpuinfo可以看到如下信息：
+NUMA体系结构则把CPU和memory进行绑定，这样unit(下文把这种内存和cpu之间绑定成为单元)间BUS进行连接。我自己开发环境中就是NUMA的结构，通过cat cpuinfo可以看到如下信息：
 </p>
 
 
@@ -79,7 +79,7 @@ cpu cores       : 6
 processor : 逻辑cpu id
 siblings ： 该物理cpu对应的逻辑cpu个数
 physical id : 物理cpu id
-core id ：物理cpu对应的核数
+core id ：物理cpu对应的核id
 cpu cores ： 该cpu对应的核数
 </p>
 
@@ -140,12 +140,12 @@ node 0 cpus（node 1 cpus）后面数字对应上面介绍的逻辑核，node 0 
 </p>
 
 <p>
-另外附这个博客中三个使用command
+另外附这个博客中两个有用command
 </p>
 
 <pre>
 
-1）查看process内存分布情况
+1）查看process内存分布单元分布情况
 cat /proc/${process_id}/numa_maps
 2）查看线程分布的processor
 top -p ${process_id} | shift+h | f + j
@@ -153,7 +153,9 @@ top -p ${process_id} | shift+h | f + j
 </pre>
 
 <p>
-具体的问题中可以实际进行设定NUMA结构中CPU和内存使用。
+具体的问题中可以根据实际设定NUMA结构中CPU和内存使用。
+在数据库使用中，比如mongo和mysql，若设定了内存在一个单元中分配，当内存到达单元上限后，会导致总体内存有空余（其它单元free内存），但是却swap操作而引起性能问题。
+这种情况，在实际使用中一定要根据程序情况，提前考虑避免。
 </p>
 
 <p>
@@ -162,6 +164,9 @@ reference:
 
 <p>
 1) <a href="http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/">http://blog.jcole.us/2010/09/28/mysql-swap-insanity-and-the-numa-architecture/</a>
+</p>
+
+<p>
 2) <a href="http://www.searchtb.com/2012/12/%E7%8E%A9%E8%BD%ACcpu-topology.html">http://www.searchtb.com/2012/12/%E7%8E%A9%E8%BD%ACcpu-topology.html</a>
 </p>
 
