@@ -37,7 +37,7 @@ non-uniform memory access (NUMA) 是在SMP体系架构之后出现的，每一�
 </p>
 
 <p>
-<img src="/images/SMP.png" />
+<img src="file:///home/chenzhen/wiki/blog_source/images/SMP.png" />
 </p>
 
 <p>
@@ -45,7 +45,7 @@ SMP结构示意图
 </p>
 
 <p>
-<img src="/images/numa-architecture.png" />
+<img src="file:///home/chenzhen/wiki/blog_source/images/numa-architecture.png" />
 </p>
 
 <p>
@@ -53,7 +53,7 @@ NUMA结构示意图
 </p>
 
 <p>
-可以看到SMP类的结构图中，所有CPU和memory的交付都需要通过BUS进行，BUS将成为性能瓶颈，在体系结构的扩展上也只能沿BUS进行。
+可以看到SMP类的结构图中，所有CPU和memory的交互都需要通过BUS进行，BUS将成为性能瓶颈，在体系结构的扩展上也只能沿BUS进行。
 NUMA体系结构则把CPU和memory进行绑定，这样unit(下文把这种内存和cpu之间绑定成为单元)间BUS进行连接。我自己开发环境中就是NUMA的结构，通过cat cpuinfo可以看到如下信息：
 </p>
 
@@ -76,11 +76,17 @@ cpu cores       : 6
 </pre>
 
 <p>
+
 processor : 逻辑cpu id
+
 siblings ： 该物理cpu对应的逻辑cpu个数
+
 physical id : 物理cpu id
+
 core id ：物理cpu对应的核id
+
 cpu cores ： 该cpu对应的核数
+
 </p>
 
 <p>
@@ -88,10 +94,15 @@ cpu cores ： 该cpu对应的核数
 </p>
 
 <p>
+
 processor ： 0-23
+
 physical id : 0-1
+
 cpu cores : 6
+
 siblings : 12
+
 </p>
 
 <p>
@@ -280,7 +291,7 @@ top -p ${process_id} | shift+h | f + j
 </p>
 
 <p>
-在性能消耗比较少的时候，内存使用也不超过单元内存情况下，使用这类体系结构进行优化才是有效的。
+在性能消耗比较少的时候，内存使用液不较少情况下，使用这类体系结构进行优化才是有效的。
 </p>
 
 <p>
