@@ -37,7 +37,7 @@ non-uniform memory access (NUMA) 是在SMP体系架构之后出现的，每一�
 </p>
 
 <p>
-<img src="file:///home/chenzhen/wiki/blog_source/images/SMP.png" />
+<img src="/images/SMP.png" />
 </p>
 
 <p>
@@ -45,7 +45,7 @@ SMP结构示意图
 </p>
 
 <p>
-<img src="file:///home/chenzhen/wiki/blog_source/images/numa-architecture.png" />
+<img src="/images/numa-architecture.png" />
 </p>
 
 <p>
@@ -76,17 +76,23 @@ cpu cores       : 6
 </pre>
 
 <p>
-
 processor : 逻辑cpu id
+</p>
 
+<p>
 siblings ： 该物理cpu对应的逻辑cpu个数
+</p>
 
+<p>
 physical id : 物理cpu id
+</p>
 
+<p>
 core id ：物理cpu对应的核id
+</p>
 
+<p>
 cpu cores ： 该cpu对应的核数
-
 </p>
 
 <p>
@@ -94,15 +100,19 @@ cpu cores ： 该cpu对应的核数
 </p>
 
 <p>
-
 processor ： 0-23
+</p>
 
+<p>
 physical id : 0-1
+</p>
 
+<p>
 cpu cores : 6
+</p>
 
+<p>
 siblings : 12
-
 </p>
 
 <p>
@@ -291,7 +301,7 @@ top -p ${process_id} | shift+h | f + j
 </p>
 
 <p>
-在性能消耗比较少的时候，内存使用液不较少情况下，使用这类体系结构进行优化才是有效的。
+在性能消耗比较少的时候，存使用也不超过单元内存情况下，使用这类体系结构进行优化才是有效的。
 </p>
 
 <p>
