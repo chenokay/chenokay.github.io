@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+
+<!--
+<link rel="Stylesheet" type="text/css" href="style.css">
+-->
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>python内存管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<header>
+<div class="inner">
+<h1>Wiki</h1>
+<h2>by chenokay</h2>
+<a href="https://github.com/chenokay" class="button"><small>View my project on</small>GitHub</a>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+
+<p>
+python内存管理不同于c语言和c++语言，采用引用计数并进行垃圾回收，在两类语言不断切换使用中需要谨慎，
+</p>
+
+<p>
+在实际使用就曾经对一个python对象的clear操作以c++语言方式导致问题，简单归纳为如下的case：
+</p>
+
+<pre>
+
+def find_max(dict, ele):
+	
+	...
+	
+	dict = {}
+在调用find_max中，对dict进行clear，实际上这样是没有clear成功的，相当于调用find_max scope中
+
+dict对应对象内容还存在，导致bug
+
+</pre>
+
+<p>
+相关文章比较多：
+</p>
+
+<p>
+<a href="http://www.cnblogs.com/vamei/p/3232088.html ">比较全面简洁介绍</a>
+</p>
+
+<p>
+<a href="http://engineering.hearsaysocial.com/2013/06/16/circular-references-in-python/ ">引用环介绍，其中提到weak reference值得进一步使用尝试下 </a>
+</p>
+
+</section>
+<aside id="sidebar">
+<h2>Zhen Chen</h2>
+<p><a href="http://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D%E5%A4%9A%E7%9B%9F">No.15 Wanquanzhuang Road, Haidian District, Beijing, China</a></p>
+<p>chenokay@gmail.com</p>
+</aside>
+</div>
+</div>
+</body>
+</html>
